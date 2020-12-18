@@ -1,0 +1,83 @@
+
+### As interações com a plataforma
+URL = (http://cidadesinteligentes.lsdi.ufma.br/)
+
+
+### Add uma capacidade (POST)
+curl -H "Content-Type: application/json" -X POST -d @cap-temperatura.json http://cidadesinteligentes.lsdi.ufma.br/catalog/capabilities | json_pp -f json
+Ou
+curl -X POST "http://cidadesinteligentes.lsdi.ufma.br/catalog/capabilities" -H "Content-Type: application/json" -d '{"name": "monitoramentopass3", "description": "monitorar passageiros", "capability_type": "sensor"}'
+
+
+### Obter os dados(capacidades disponíveis na plataforma) (GET)
+curl http://cidadesinteligentes.lsdi.ufma.br/catalog/capabilities | json_pp -f json
+
+
+### Atualizar os dados (PUT)
+curl -H "Content-Type: application/json" -X PUT -d'{"description":"graus celsius (float)","capability_type":"sensor"}' http://cidadesinteligentes.lsdi.ufma.br/catalog/capabilities/temperatura | json_pp -f json
+
+
+### Add recurso (POST)
+curl -X POST -H "Content-Type: application/json" -d @termometro01.json http://cidadesinteligentes.lsdi.ufma.br/adaptor/resources | json_pp -f json
+Obs: retorna o UUID
+
+
+### Obter todos os recursos
+curl http://cidadesinteligentes.lsdi.ufma.br/catalog/resources | json_pp -f json
+
+
+### Obter um recurso
+curl http://cidadesinteligentes.lsdi.ufma.br/colletor/resources/{UUID}/data | json_pp -f json
+Obs: tem que passar o UUID
+
+
+
+{
+   "data" : {
+      "capabilities" : [],
+      "city" : null,
+      "collect_interval" : null,
+      "country" : null,
+      "created_at" : "2020-12-08T14:18:00.245Z",
+      "description" : "Passageiro pablo",
+      "id" : 3316,
+      "lat" : -23.559616,
+      "lon" : -46.731386,
+      "neighborhood" : null,
+      "postal_code" : null,
+      "state" : null,
+      "status" : "active",
+      "updated_at" : "2020-12-08T14:18:00.245Z",
+      "uri" : null,
+      "uuid" : "5766273d-d803-4520-b1cc-f5635ec1ca05"
+   }
+}
+===========================================================
+"resources": [
+        {
+            "id": 3320,
+            "uri": null,
+            "created_at": "2020-12-09T20:51:36.830Z",
+            "updated_at": "2020-12-09T20:51:36.830Z",
+            "lat": 0,
+            "lon": 0,
+            "status": "active",
+            "collect_interval": null,
+            "description": "Monitoramento pass resource testeee",
+            "uuid": "18fde2f3-c48a-4269-ada1-43c2664665f4",
+            "city": null,
+            "neighborhood": null,
+            "state": null,
+            "postal_code": null,
+            "country": null,
+            "capabilities": [
+                "sb_group_track"
+            ]
+        }
+================================================================
+{
+            "id": 277,
+            "name": "sb_group_track",
+            "function": 0,
+            "description": "Equipe SmartBiking(sb): localização do grupo de ciclismo em tempo real!"
+        }

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Gerente de Passageiro</string>
+    <string name="available_sensors">Escolha paciente para monitorar:</string>
+    <string name="start">Iniciar</string>
+    <string name="stop">Parar</string>
+    <string name="messages_label">Dados do passageiro</string>
+    <string name="clear">Limpar</string>
+    <string name="filter_label">Filtro (EPL):</string>
+    <string name="filter_button_label">Filtrar</string>
+    <string name="clear_filter_button_label">Tudo</string>
+    <string name="subscrever_sensores">versão: Gerente</string>
+    <string name="pub_sub_mensagem">Configuração</string>
+    <string name="sinais_vitais">Sobre</string>
+    <string name="subscrever_no_topico">Subscrever no Tópico</string>
+    <string name="subscrever">Subscrever</string>
+    <string name="mensagem_para_publicar">Mensagem para Publicar</string>
+    <string name="publicar">Publicar</string>
+    <string name="mensagens">Mensagens Recebidas</string>
+    <string name="lsdi_logo">LSDi logo</string>
+    <string name="API_KEY">AIzaSyANfnI88SCXj3Bdi8W9zbqL1xYlt8Q-w40</string>
+    <string name="title_activity_maps">Map</string>
+</resources>
