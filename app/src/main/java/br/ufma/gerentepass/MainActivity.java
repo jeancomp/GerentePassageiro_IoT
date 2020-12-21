@@ -93,22 +93,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        eb = EventBus.builder().build();
-        eb.register(this);
-        if (savedInstanceState == null) {
-            configCDDL();
-        }
-
-        interscityTeste = new InterscityTeste(getApplicationContext());
-
-        localizacaoPass = new LocalizacaoPass();
+//        eb = EventBus.builder().build();
+//        eb.register(this);
+//        if (savedInstanceState == null) {
+//            configCDDL();
+//        }
+//
+//        interscityTeste = new InterscityTeste(getApplicationContext());
+//
+//        localizacaoPass = new LocalizacaoPass();
 
 //        context = cddl.getContext();
 //        interscity = new Interscity(context);
 //        conectInterscity();
 //        interscity.getDados();
 
-        setPermissions();
+//        setPermissions();
 
         //configSpinner();
         //configListView();
@@ -190,14 +190,14 @@ public class MainActivity extends AppCompatActivity {
                         public void run() {
                             //atualizaTotalAlerta(t1,1);
                             if(true) {
-                                Log.d(TAG, "##########  Satisfeita a regra subscriber " + monitorCode.toString());
+                                Log.d(TAG, "##########  Satisfeita a regra subscriber " + monitorCode);
                                 //geraAlerta(1, msgAlerta(message));
                             }
                         }
                     });
                 }
             }.start();});
-        Log.i(TAG,"####### Disparo monitorCode: " + monitorCode);
+        //Log.i(TAG,"####### Disparo monitorCode: " + monitorCode);
     }
 
     private void onMessage(Message message) {
@@ -266,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        eb.unregister(this);
+        //eb.unregister(this);
         super.onDestroy();
     }
 

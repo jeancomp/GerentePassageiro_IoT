@@ -73,16 +73,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     Message msgPassageiro = new Message();
 
+    // Método reponsável por atualizar o MAPA através de uma Thread
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
             interscityTeste.get(uuid, localizacaoPass);
             handler2.postDelayed(this,5 * 1000); // loop a cada 5 segundos
+
+            //msgPassageiro.setServiceValue("LA");
+            //pub.publish(msgPassageiro);
+
+            String s = "2.9999";
+            double d = Double.parseDouble("44.7777");
+
+            Object[] o = {s,d};
+            msgPassageiro.setServiceValue(o);
+
+            pub.publish(msgPassageiro);
+            onMessage(msgPassageiro);
         }
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
@@ -124,6 +137,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
+        mMap.getUiSettings().setMapToolbarEnabled(false);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
 
         atualizaDestino();
 
@@ -175,29 +191,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         subscriber.setSubscriberListener(this::onMessage);
         //subscriber.setSubscriberListener(this::onMessageTopic);
 
-        monitorCode = subscriber.getMonitor().addRule("select * from Message", message -> {
+        //subscriber.subscribeObjectConnectedTopic();
+        //subscriber.subscribeObjectDiscoveredTopic();
+
+        monitorCode = pub.getMonitor().addRule("select ((latitude_origem-latitude_destino)+(longitude_origem-longitude_destino)) * 111.19 FROM Message", message -> {
             new Thread() {
                 public void run() {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             //atualizaTotalAlerta(t1,1);
-                            if(true) {
-                                Log.d(TAG, "##########  Satisfeita a regra subscriber " + monitorCode);
-                                //geraAlerta(1, msgAlerta(message));
-                            }
+                            Log.d(TAG, "### >>>>>>>>>>>>>>>>>>>> " + monitorCode);
+                            //geraAlerta(1, msgAlerta(message))
                         }
                     });
                 }
             }.start();});
-        Log.i(TAG,"####### Disparo monitorCode: " + monitorCode);
+        //Log.i(TAG,"####### Disparo monitorCode: " + monitorCode);
     }
 
     public void onMessage(Message message) {
         handler.post(() -> {
             Object[] valor = message.getServiceValue();
-            Log.i(TAG,"#### LLLLLLL " + valor.toString());
-            listViewMessages.add(StringUtils.join(valor));
+            //Log.i(TAG,"#### O Que de mensagem chegou: " + valor[0]);
+            listViewMessages.add(StringUtils.join(valor[0] , ", " + valor[1]));
             listViewAdapter.notifyDataSetChanged();
         });
     }

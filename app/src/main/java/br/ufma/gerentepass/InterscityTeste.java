@@ -224,6 +224,7 @@ public class InterscityTeste {
 
     public void get(String resourceUUID, LocalizacaoPass dadosPassageiro){
         String final_uri = baseUri.concat("collector/resources/").concat(resourceUUID).concat("/").concat("data/").concat("last");
+
         StringRequest postRequest = new StringRequest(Request.Method.POST, final_uri, response -> {
             try {
                 JSONObject jsonResponse = new JSONObject(response); // transforma a response em objeto json
@@ -285,8 +286,6 @@ public class InterscityTeste {
             public byte[] getBody() throws AuthFailureError {
 
                 try {
-
-
                     JSONArray capabilities_array = new JSONArray();
                     capabilities_array.put("localizacao"); // Aqui vc adiciona as capacidades que deseja consultar o ultimo dado
 
@@ -296,18 +295,13 @@ public class InterscityTeste {
                     data.put("start_range", "2016-06-25T12:21:29");
                     data.put("end_range", "2022-06-25T16:21:29");
 
-
                     return data.toString().getBytes(StandardCharsets.UTF_8);
-
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
                 return super.getBody();
             }
-
         };
         requestQueue.add(postRequest);
         //queue.add(postRequest);

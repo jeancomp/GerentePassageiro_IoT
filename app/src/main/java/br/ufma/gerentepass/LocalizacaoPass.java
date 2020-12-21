@@ -10,8 +10,6 @@ public class LocalizacaoPass {
     Double latitudeDestino;
     Double longitudeDestino;
 
-    //String teste = '' ;
-
     LocalizacaoPass(){
         latitude = -2.532165;
         longitude = -44.296644;
